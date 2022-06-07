@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	[SerializeField] private Room current;
+	[SerializeField] private Room startRoom;
+	
+	private Room current;
 	
 	// Start is called before the first frame update
 	void Start()
 	{
-		Debug.Log("Start game:" + current);
+		Debug.Log("Start game:" + startRoom);
 		
-		if(current == null) return;
-		AddOnChangeRoomListeners(current.doors);
+		ChangeCurrentRoom(startRoom);
 	}
 	
 	private void ChangeCurrentRoom(Room destination)
@@ -20,11 +21,12 @@ public class GameManager : MonoBehaviour
 		if(current)
 		{
 			RemoveOnChangeRoomListeners(current.doors);
-			current.gameObject.SetActive(false);
+			current.ExitRoom();
 		}
 		
-		destination.gameObject.SetActive(true);
+		//destination.gameObject.SetActive(true);
 		AddOnChangeRoomListeners(destination.doors);
+		destination.ViewRoom();
 		current = destination;
 	}
 	
