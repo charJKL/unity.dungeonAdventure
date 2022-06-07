@@ -24,8 +24,10 @@ public class Door : MonoBehaviour
 	
 	private void OnMouseDown()
 	{
+		Debug.Log("Door::OnMouseDown");
 		if(OnChangeRoom != null)
 		{
+			Debug.Log("Door::OnMouseDown>>" + destination.name);
 			OnChangeRoom(destination);
 		}
 	}

@@ -6,8 +6,11 @@ public class Room : MonoBehaviour
 {
 	[HideInInspector] public Door[] doors;
 	
-	void Start()
+	void Awake()
 	{
 		doors = GetComponentsInChildren<Door>();
+		
+		
+		Debug.Log("Awake room " + this.name + " with doors= "+ doors.Length);
 	}
 }

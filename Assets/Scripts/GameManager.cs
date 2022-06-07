@@ -17,19 +17,25 @@ public class GameManager : MonoBehaviour
 	
 	private void ChangeCurrentRoom(Room destination)
 	{
-		if(current) RemoveOnChangeRoomListeners(current.doors);
+		if(current)
+		{
+			RemoveOnChangeRoomListeners(current.doors);
+			current.gameObject.SetActive(false);
+		}
+		
+		destination.gameObject.SetActive(true);
 		AddOnChangeRoomListeners(destination.doors);
 		current = destination;
 	}
 	
 	private void AddOnChangeRoomListeners(Door[] doors)
 	{
-		foreach(Door door in current.doors) door.OnChangeRoom += ChangeRoom;
+		foreach(Door door in doors) door.OnChangeRoom += ChangeRoom;
 	}
 	
 	private void RemoveOnChangeRoomListeners(Door[] doors)
 	{
-		foreach(Door door in current.doors) door.OnChangeRoom -= ChangeRoom;
+		foreach(Door door in doors) door.OnChangeRoom -= ChangeRoom;
 	}
 	
 	public void ChangeRoom(Room destination)

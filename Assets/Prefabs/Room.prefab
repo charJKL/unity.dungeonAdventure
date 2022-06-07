@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 166114208060394031}
   m_Layer: 0
   m_Name: Room
-  m_TagString: Door
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b58086f5128ebe4891356e7fa76b5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doors: []
