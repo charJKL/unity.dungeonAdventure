@@ -4,17 +4,38 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	[SerializeField] private GameObject startRoom;
+	[SerializeField] private Room current;
 	
 	// Start is called before the first frame update
 	void Start()
 	{
-		Debug.Log("Start game");
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
+		Debug.Log("Start game:" + current);
 		
+		if(current == null) return;
+		AddOnChangeRoomListeners(current.doors);
 	}
+	
+	private void ChangeCurrentRoom(Room destination)
+	{
+		if(current) RemoveOnChangeRoomListeners(current.doors);
+		AddOnChangeRoomListeners(destination.doors);
+		current = destination;
+	}
+	
+	private void AddOnChangeRoomListeners(Door[] doors)
+	{
+		foreach(Door door in current.doors) door.OnChangeRoom += ChangeRoom;
+	}
+	
+	private void RemoveOnChangeRoomListeners(Door[] doors)
+	{
+		foreach(Door door in current.doors) door.OnChangeRoom -= ChangeRoom;
+	}
+	
+	public void ChangeRoom(Room destination)
+	{
+		Debug.Log("Change current room to" + destination.name);
+		ChangeCurrentRoom(destination);
+	}
+	
 }

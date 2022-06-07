@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-	[SerializeField] private MeshRenderer mesh;
-		
+	[SerializeField] private MeshRenderer mesh;	
 	[SerializeField] private Material defaultMaterial;
 	[SerializeField] private Material hoverMaterial;
+	[SerializeField] private Room destination;
+	
+	public delegate void ChangeRoom(Room destination);
+	public event ChangeRoom OnChangeRoom;
 	
 	private void OnMouseEnter()
 	{
@@ -21,6 +24,9 @@ public class Door : MonoBehaviour
 	
 	private void OnMouseDown()
 	{
-		Debug.Log("door was clicked" + this.name);
+		if(OnChangeRoom != null)
+		{
+			OnChangeRoom(destination);
+		}
 	}
 }
