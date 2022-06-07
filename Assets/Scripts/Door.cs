@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void ChangeRoom(Room destination);
+
 public class Door : MonoBehaviour
 {
 	[SerializeField] private MeshRenderer mesh;
@@ -9,7 +11,6 @@ public class Door : MonoBehaviour
 	[SerializeField] private Material hoverMaterial;
 	[SerializeField] private Room destination;
 	
-	public delegate void ChangeRoom(Room destination);
 	public event ChangeRoom OnChangeRoom;
 	
 	private void OnMouseEnter()
@@ -28,7 +29,7 @@ public class Door : MonoBehaviour
 		if(OnChangeRoom != null)
 		{
 			Debug.Log("Door::OnMouseDown>>" + destination.name);
-			OnChangeRoom(destination);
+			OnChangeRoom.Invoke(destination);
 			mesh.material = defaultMaterial;
 		}
 	}
