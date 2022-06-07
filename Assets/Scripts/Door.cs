@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-	[SerializeField] private MeshRenderer mesh;	
+	[SerializeField] private MeshRenderer mesh;
 	[SerializeField] private Material defaultMaterial;
 	[SerializeField] private Material hoverMaterial;
 	[SerializeField] private Room destination;
@@ -29,6 +29,7 @@ public class Door : MonoBehaviour
 		{
 			Debug.Log("Door::OnMouseDown>>" + destination.name);
 			OnChangeRoom(destination);
+			mesh.material = defaultMaterial;
 		}
 	}
 }
