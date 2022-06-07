@@ -59,6 +59,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44ac79a95dda514459222b8c4326b4f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mesh: {fileID: 1794975103156174027}
+  defaultMaterial: {fileID: 2100000, guid: f1a7a72e83eddd94cac37563011122e9, type: 2}
+  hoverMaterial: {fileID: 2100000, guid: e06863f68ea683247a211ec02da9507a, type: 2}
 --- !u!1 &8288419797200749322
 GameObject:
   m_ObjectHideFlags: 0

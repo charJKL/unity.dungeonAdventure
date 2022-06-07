@@ -4,32 +4,23 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-	
-	
-	// Start is called before the first frame update
-	void Start()
-	{
-		Debug.Log("start dooor logic");
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
+	[SerializeField] private MeshRenderer mesh;
 		
-	}
-
+	[SerializeField] private Material defaultMaterial;
+	[SerializeField] private Material hoverMaterial;
+	
 	private void OnMouseEnter()
 	{
-		Debug.Log("mouse enter the door");
+		mesh.material = hoverMaterial;
+	}
+	
+	private void OnMouseExit()
+	{
+		mesh.material = defaultMaterial;
 	}
 	
 	private void OnMouseDown()
 	{
 		Debug.Log("door was clicked" + this.name);
-	}
-	
-	private void OnMouseExit()
-	{
-		Debug.Log("mouse leave door");
 	}
 }
