@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Things;
+using Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,13 +34,13 @@ public class GameManager : MonoBehaviour
 	private void AddRoomEventCallbacks(Room room)
 	{
 		foreach(Door door in room.doors) door.OnChangeRoom += ChangeRoomCallback;
-		foreach(Item item in room.items) item.OnPickupItem += PickupItemCallback;
+		foreach(PickupEvent pickup in room.items) pickup.OnPickupItem += PickupItemCallback;
 	}
 	
 	private void RemoveRoomEventCallbacks(Room room)
 	{
 		foreach(Door door in room.doors) door.OnChangeRoom -= ChangeRoomCallback;
-		foreach(Item item in room.items) item.OnPickupItem -= PickupItemCallback;
+		foreach(PickupEvent pickup in room.items) pickup.OnPickupItem -= PickupItemCallback;
 	}
 	
 	private void ChangeRoomCallback(Room destination)
@@ -49,7 +51,7 @@ public class GameManager : MonoBehaviour
 	
 	private void PickupItemCallback(Item item)
 	{
-		Debug.Log("Pickup item: " + item.name);
-		
+		Debug.Log("You pickup: " + item.gameObject.name);
 	}
+	
 }
