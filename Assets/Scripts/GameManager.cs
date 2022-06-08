@@ -22,34 +22,34 @@ public class GameManager : MonoBehaviour
 	{
 		if(current)
 		{
-			RemoveRoomEventCallbacks(current);
+			RemoveRoomEventListeners(current);
 			current.ExitRoom();
 		}
 		
-		AddRoomEventCallbacks(destination);
+		AddRoomEventListeners(destination);
 		destination.ViewRoom();
 		current = destination;
 	}
 	
-	private void AddRoomEventCallbacks(Room room)
+	private void AddRoomEventListeners(Room room)
 	{
-		foreach(Door door in room.doors) door.OnChangeRoom += ChangeRoomCallback;
-		foreach(PickupEvent pickup in room.items) pickup.OnPickupItem += PickupItemCallback;
+		foreach(GoThroughEvent door in room.doors) door.OnGoThrough += OnGoThroughListener;
+		foreach(PickupEvent pickup in room.items) pickup.OnPickupItem += PickupItemListener;
 	}
 	
-	private void RemoveRoomEventCallbacks(Room room)
+	private void RemoveRoomEventListeners(Room room)
 	{
-		foreach(Door door in room.doors) door.OnChangeRoom -= ChangeRoomCallback;
-		foreach(PickupEvent pickup in room.items) pickup.OnPickupItem -= PickupItemCallback;
+		foreach(GoThroughEvent door in room.doors) door.OnGoThrough -= OnGoThroughListener;
+		foreach(PickupEvent pickup in room.items) pickup.OnPickupItem -= PickupItemListener;
 	}
 	
-	private void ChangeRoomCallback(Room destination)
+	private void OnGoThroughListener(Room destination)
 	{
 		Debug.Log("Change current room to: " + destination.name);
 		ChangeCurrentRoom(destination);
 	}
 	
-	private void PickupItemCallback(Item item)
+	private void PickupItemListener(Item item)
 	{
 		Debug.Log("You pickup: " + item.gameObject.name);
 	}

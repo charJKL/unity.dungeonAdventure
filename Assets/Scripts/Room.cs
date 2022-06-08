@@ -8,12 +8,12 @@ public class Room : MonoBehaviour
 {
 	[SerializeField] private Camera cameraObject;
 	
-	[HideInInspector] public Door[] doors;
+	[HideInInspector] public GoThroughEvent[] doors;
 	[HideInInspector] public PickupEvent[] items;
 	
 	void Awake()
 	{
-		doors = GetComponentsInChildren<Door>();
+		doors = GetComponentsInChildren<GoThroughEvent>();
 		items = GetComponentsInChildren<PickupEvent>();
 		
 		Debug.Log("Awake room " + this.name + " with doors= "+ doors.Length);
