@@ -7,11 +7,12 @@ public class Room : MonoBehaviour
 	[SerializeField] private Camera cameraObject;
 	
 	[HideInInspector] public Door[] doors;
+	[HideInInspector] public Item[] items;
 	
 	void Awake()
 	{
 		doors = GetComponentsInChildren<Door>();
-		
+		items = GetComponentsInChildren<Item>();
 		
 		Debug.Log("Awake room " + this.name + " with doors= "+ doors.Length);
 	}

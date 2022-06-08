@@ -20,30 +20,36 @@ public class GameManager : MonoBehaviour
 	{
 		if(current)
 		{
-			RemoveOnChangeRoomListeners(current.doors);
+			RemoveRoomEventCallbacks(current);
 			current.ExitRoom();
 		}
 		
-		//destination.gameObject.SetActive(true);
-		AddOnChangeRoomListeners(destination.doors);
+		AddRoomEventCallbacks(destination);
 		destination.ViewRoom();
 		current = destination;
 	}
 	
-	private void AddOnChangeRoomListeners(Door[] doors)
+	private void AddRoomEventCallbacks(Room room)
 	{
-		foreach(Door door in doors) door.OnChangeRoom += ChangeRoom;
+		foreach(Door door in room.doors) door.OnChangeRoom += ChangeRoomCallback;
+		foreach(Item item in room.items) item.OnPickupItem += PickupItemCallback;
 	}
 	
-	private void RemoveOnChangeRoomListeners(Door[] doors)
+	private void RemoveRoomEventCallbacks(Room room)
 	{
-		foreach(Door door in doors) door.OnChangeRoom -= ChangeRoom;
+		foreach(Door door in room.doors) door.OnChangeRoom -= ChangeRoomCallback;
+		foreach(Item item in room.items) item.OnPickupItem -= PickupItemCallback;
 	}
 	
-	public void ChangeRoom(Room destination)
+	private void ChangeRoomCallback(Room destination)
 	{
-		Debug.Log("Change current room to" + destination.name);
+		Debug.Log("Change current room to: " + destination.name);
 		ChangeCurrentRoom(destination);
 	}
 	
+	private void PickupItemCallback(Item item)
+	{
+		Debug.Log("Pickup item: " + item.name);
+		
+	}
 }
