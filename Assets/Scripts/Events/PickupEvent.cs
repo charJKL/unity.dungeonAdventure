@@ -1,24 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Things;
+using Prefabs;
 
 namespace Events
 {
 	public delegate void Pickup(Item item);
 	
+	[RequireComponent(typeof(Item))]
 	public class PickupEvent : MonoBehaviour
 	{
 		public event Pickup OnPickupItem;
-		
-		public void Awake()
-		{
-			var isItem = gameObject.GetComponent<Item>() != null;
-			if(isItem == false)
-			{
-				Debug.LogError("You can'y pickup game object which is not `Item`.", gameObject);
-			}
-		}
 		
 		private void OnMouseDown()
 		{
