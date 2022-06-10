@@ -42,11 +42,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 614856424331508315}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b58086f5128ebe4891356e7fa76b5e5, type: 3}
+  m_Script: {fileID: 11500000, guid: ad4c854adf86a05429703d3d8156ef9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cameraObject: {fileID: 6599939169720219592}
   doors: []
+  items: []
 --- !u!1 &1952808918333375461
 GameObject:
   m_ObjectHideFlags: 0

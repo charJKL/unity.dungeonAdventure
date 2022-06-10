@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Events;
 
-namespace Things
+namespace Prefabs
 {
 	public class Room : MonoBehaviour
 	{
@@ -12,15 +12,15 @@ namespace Things
 		[HideInInspector] public GoThroughEvent[] doors;
 		[HideInInspector] public PickupEvent[] items;
 		
-		void Awake()
+		private void Awake()
 		{
 			doors = GetComponentsInChildren<GoThroughEvent>();
 			items = GetComponentsInChildren<PickupEvent>();
 			
-			Debug.Log("Awake room " + this.name + " with doors= "+ doors.Length);
+			Debug.Log($"Awake room {this.name} with doors={doors.Length}, items={items.Length}.");
 		}
 		
-		public void ViewRoom()
+		public void EnterRoom()
 		{
 			cameraObject.enabled = true;
 		}

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Things
+namespace Prefabs
 {
-	public abstract class Item : MonoBehaviour
+	public class ItemKey : Item
 	{
-		
+		[SerializeField] private Door door;
 	}
 }
