@@ -14,7 +14,7 @@ namespace Events
 		
 		private void OnMouseDown()
 		{
-			Debug.Log("GoThroughEvent::OnMouseDown");
+			Debug.Log($"GoThroughEvent::OnMouseDown.");
 			if(OnGoThrough != null)
 			{
 				Debug.Log("GoThroughEvent::OnMouseDown>>" + gameObject.name);

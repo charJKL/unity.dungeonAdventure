@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Things;
+using Prefabs;
+using PrefabsUi;
 using Events;
+
 
 public class GameManager : MonoBehaviour
 {
 	[SerializeField] private Room startRoom;
+	[SerializeField] private Inventory inventory;
 	
+	private List<Item> items;
 	private Room current;
 	
-	// Start is called before the first frame update
-	void Start()
+	private void Start()
 	{
-		Debug.Log("Start game:" + startRoom);
+		Debug.Log($"Start game in: {startRoom}");
 		
 		ChangeCurrentRoom(startRoom);
 	}
@@ -27,14 +30,21 @@ public class GameManager : MonoBehaviour
 		}
 		
 		AddRoomEventListeners(destination);
-		destination.ViewRoom();
+		destination.EnterRoom();
 		current = destination;
+	}
+	
+	private void PickupItemIntoInventory(Item item)
+	{
+		items.Add(item);
+		inventory.RedrawInventory(items);
 	}
 	
 	private void AddRoomEventListeners(Room room)
 	{
 		foreach(GoThroughEvent door in room.doors) door.OnGoThrough += OnGoThroughListener;
 		foreach(PickupEvent pickup in room.items) pickup.OnPickupItem += PickupItemListener;
+		Debug.Log($"Add event listeners {room.doors.Length}");
 	}
 	
 	private void RemoveRoomEventListeners(Room room)
@@ -52,6 +62,7 @@ public class GameManager : MonoBehaviour
 	private void PickupItemListener(Item item)
 	{
 		Debug.Log("You pickup: " + item.gameObject.name);
+		PickupItemIntoInventory(item);
 	}
 	
 }
