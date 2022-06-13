@@ -5,18 +5,18 @@ using Prefabs;
 using PrefabsUi;
 using Events;
 
-
 public class GameManager : MonoBehaviour
 {
 	[SerializeField] private Room startRoom;
-	[SerializeField] private Inventory inventory;
+	[SerializeField] private Inventory uiInventory;
 	
-	private List<Item> items;
+	private List<InventoryItem> inventory;
 	private Room current;
 	
 	private void Start()
 	{
 		Debug.Log($"Start game in: {startRoom}");
+		inventory = new List<InventoryItem>();
 		
 		ChangeCurrentRoom(startRoom);
 	}
@@ -36,15 +36,16 @@ public class GameManager : MonoBehaviour
 	
 	private void PickupItemIntoInventory(Item item)
 	{
-		items.Add(item);
-		inventory.RedrawInventory(items);
+		InventoryItem inventoryItem = item.item;
+		inventory.Add(inventoryItem);
+		uiInventory.RedrawInventory(inventory);
+		Debug.Log($"Items in inventory: {inventory}.");
 	}
 	
 	private void AddRoomEventListeners(Room room)
 	{
 		foreach(GoThroughEvent door in room.doors) door.OnGoThrough += OnGoThroughListener;
 		foreach(PickupEvent pickup in room.items) pickup.OnPickupItem += PickupItemListener;
-		Debug.Log($"Add event listeners {room.doors.Length}");
 	}
 	
 	private void RemoveRoomEventListeners(Room room)
@@ -61,7 +62,7 @@ public class GameManager : MonoBehaviour
 	
 	private void PickupItemListener(Item item)
 	{
-		Debug.Log("You pickup: " + item.gameObject.name);
+		Debug.Log($"You pickup: {item.name}.");
 		PickupItemIntoInventory(item);
 	}
 	

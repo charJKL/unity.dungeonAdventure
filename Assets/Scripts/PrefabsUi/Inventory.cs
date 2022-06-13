@@ -7,22 +7,24 @@ namespace PrefabsUi
 {
 	public class Inventory : MonoBehaviour
 	{
+		[SerializeField] private GameObject inventorySlot;
+		
 		[HideInInspector] private Transform box;
-		[HideInInspector] private GameObject slotPrefab;
 		
 		private void Awake()
 		{
 			box = transform.Find("InventoryBox");
 		}
 		
-		public void RedrawInventory(List<Item> items)
+		public void RedrawInventory(List<InventoryItem> items)
 		{
+			Debug.Log("works?");
 			items.ForEach(InstantiateItemInSlot);
 		}
 		
-		private void InstantiateItemInSlot(Item item)
+		private void InstantiateItemInSlot(InventoryItem item)
 		{
-			GameObject slot = Instantiate(slotPrefab, box);
+			GameObject slot = Instantiate(inventorySlot, box);
 			slot.GetComponent<InventorySlot>().item = item;
 		}
 	}

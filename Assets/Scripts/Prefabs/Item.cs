@@ -6,7 +6,6 @@ namespace Prefabs
 {
 	public class Item : MonoBehaviour
 	{
-		[SerializeField] private string id;
-		[SerializeField] private Sprite icon;
+		[SerializeField] public InventoryItem item;
 	}
 }
